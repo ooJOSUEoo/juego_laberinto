@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #232323;
+}
+.center{
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+}
+
+@media all and (orientation:portrait) { 
+    canvas{
+        display: none;
+    }
+    button{
+        display: none;
+    }
+    body{
+        background: url('https://smartandroid.fr/wp-content/uploads/2020/04/probleme-rotation-ecran2.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
