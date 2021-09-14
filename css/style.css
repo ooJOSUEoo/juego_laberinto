@@ -8,9 +8,28 @@ body{
 .center{
     text-align: center;
     width: 100%;
-    height: 100vh;
+    /*height: 100vh;*/
 }
-
+.op{
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+button{
+    margin-left: 10px;
+    cursor: pointer;
+}
+#n1,#n2,#n3,#n4{
+    border: none;
+    width: 20px;
+}
+.activo{
+    color: #fff;
+    background-color: #000;
+}
+.dnone{
+    display: none;
+}
 @media all and (orientation:portrait) { 
     canvas{
         display: none;

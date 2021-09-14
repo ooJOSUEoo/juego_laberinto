@@ -2,18 +2,103 @@ alert('Instrucciones: si eres de celular toca la parte superior para ir hacia ar
 let W = 1000
 let H = 500
 const cells = []
-let mazeW = 50 //32
-let mazeH = 25 //32
+let mazeW = 70 //50 
+let mazeH = 34 //25
 const stack = []
-let pixelSize = 20 //16
+let pixelSize = 15 //20 
 
 //posicion jugador
 let playerx = 0;
 let playery = 0;
+//botones de nivel
+document.getElementById('n1').addEventListener('click', () => {
+    document.getElementById('n1').classList.add('activo')
+    document.getElementById('n2').classList.remove('activo')
+    document.getElementById('n3').classList.remove('activo')
+    document.getElementById('n4').classList.remove('activo')
+
+    mazeW = 26
+    mazeH = 13
+    pixelSize = 38
+
+    px = Math.round(Math.random() * mazeW - 1)
+    py = Math.round(Math.random() * mazeH - 1)
+    if (px < 0 || px > mazeW) {
+        px = 0
+    }
+    if (py < 0 || py > mazeH) {
+        py = 0
+    }
+
+})
+document.getElementById('n2').addEventListener('click', () => {
+    document.getElementById('n1').classList.remove('activo')
+    document.getElementById('n2').classList.add('activo')
+    document.getElementById('n3').classList.remove('activo')
+    document.getElementById('n4').classList.remove('activo')
+
+    mazeW = 40
+    mazeH = 20
+    pixelSize = 25
+
+    px = Math.round(Math.random() * mazeW - 1)
+    py = Math.round(Math.random() * mazeH - 1)
+    if (px < 0 || px > mazeW) {
+        px = 0
+    }
+    if (py < 0 || py > mazeH) {
+        py = 0
+    }
+})
+document.getElementById('n3').addEventListener('click', () => {
+    document.getElementById('n1').classList.remove('activo')
+    document.getElementById('n2').classList.remove('activo')
+    document.getElementById('n3').classList.add('activo')
+    document.getElementById('n4').classList.remove('activo')
+
+    mazeW = 50
+    mazeH = 25
+    pixelSize = 20
+
+    px = Math.round(Math.random() * mazeW - 1)
+    py = Math.round(Math.random() * mazeH - 1)
+    if (px < 0 || px > mazeW) {
+        px = 0
+    }
+    if (py < 0 || py > mazeH) {
+        py = 0
+    }
+})
+document.getElementById('n4').addEventListener('click', () => {
+    document.getElementById('n1').classList.remove('activo')
+    document.getElementById('n2').classList.remove('activo')
+    document.getElementById('n3').classList.remove('activo')
+    document.getElementById('n4').classList.add('activo')
+
+    mazeW = 70
+    mazeH = 34
+    pixelSize = 15
+
+    px = Math.round(Math.random() * mazeW - 5)
+    py = Math.round(Math.random() * mazeH - 2)
+    if (px < 0 || px > mazeW) {
+        px = 0
+    }
+    if (py < 0 || py > mazeH) {
+        py = 0
+    }
+})
+
 
 //posicion premio
-px = Math.round(Math.random() * mazeW)
-py = Math.round(Math.random() * mazeH)
+px = Math.round(Math.random() * mazeW - 1)
+py = Math.round(Math.random() * mazeH - 1)
+if (px < 0 || px > mazeW) {
+    px = 0
+}
+if (py < 0 || py > mazeH) {
+    py = 0
+}
 
 function setup() {
     const canvas = createCanvas(W, H)
@@ -153,6 +238,32 @@ function draw() {
     noStroke()
     fill('yellow')
     ellipse(px * pixelSize + (pixelSize / 2), py * pixelSize + (pixelSize / 2), pixelSize / 2, pixelSize / 2)
+
+    //limites de puntero
+    noStroke()
+    fill('red')
+    ellipse(300, 150, pixelSize / 2, pixelSize / 2)
+    ellipse(500, 150, pixelSize / 2, pixelSize / 2)
+    ellipse(700, 150, pixelSize / 2, pixelSize / 2)
+
+    ellipse(300, 350, pixelSize / 2, pixelSize / 2)
+    ellipse(500, 350, pixelSize / 2, pixelSize / 2)
+    ellipse(700, 350, pixelSize / 2, pixelSize / 2)
+
+    rect(300, 0, 1, 150)
+    rect(700, 0, 1, 150)
+    rect(300, 350, 1, 500)
+    rect(700, 350, 1, 500)
+    rect(500, 150, 1, 200)
+
+    rect(0, 150, 1000, 1)
+    rect(0, 350, 1000, 1)
+
+    textSize(50);
+    text('<', 300, 250)
+    text('^', 500, 100)
+    text('>', 700, 250)
+    text('v', 500, 420)
 }
 
 function ganar() {
@@ -193,24 +304,24 @@ function keyPressed() {
 
 window.onload = function () {
     var el = document.querySelector("canvas");
-    el.addEventListener("click", (e)=>{
-        console.log(e.clientX +'  '+ e.clientY)
-        if (e.clientX < 500 && e.clientY > 150 && e.clientY < 300 && playerx > 0) {
+    el.addEventListener("click", (e) => {
+        console.log(e.clientX + '  ' + e.clientY);
+        if (e.clientX < 657 && e.clientY > 186 && e.clientY < 386 && playerx > 0) {
             if (!cells[playery][playerx].west) {
                 playerx -= 1
             }
         }
-        if (e.clientX > 500 && e.clientY > 150 && e.clientY < 300 && playerx < mazeW - 1) {
+        if (e.clientX > 657 && e.clientY > 186 && e.clientY < 386 && playerx < mazeW - 1) {
             if (!cells[playery][playerx].east) {
                 playerx += 1
             }
         }
-        if (e.clientY < 250 && e.clientX > 250 && e.clientX < 750 && playery > 0) {
+        if (e.clientY < 186 && e.clientX > 458 && e.clientX < 858 && playery > 0) {
             if (!cells[playery][playerx].north) {
                 playery -= 1
             }
         }
-        if (e.clientY > 250 && e.clientX > 250 && e.clientX < 750 && playery < mazeH - 1) {
+        if (e.clientY > 386 && e.clientX > 458 && e.clientX < 858 && playery < mazeH - 1) {
             if (!cells[playery][playerx].south) {
                 playery += 1
             }
